@@ -23,7 +23,7 @@ export const menuAni = {
     height: 0,
   },
   animate: {
-    height: "40vh",
+    height: "36vh",
   },
   transition: {
     duration: 0.5,

@@ -22,7 +22,7 @@ const Navigation = () => {
       <div className=" bg-white shadow-sm w-full">
         <>
           {/* nav for mediom and larg devices */}
-          <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
@@ -50,13 +50,13 @@ const Navigation = () => {
                   ))}
                 </div>
               </div>
-              {/* <div className="md:w-1/3 flex justify-center items-center">
-                  <input
-                    type="search"
-                    placeholder="search for articles"
-                    className="w-full border py-1 px-2 rounded-lg outline-none"
-                  />
-                </div> */}
+              <div className="md:w-1/3  justify-center hidden sm:flex items-center">
+                <input
+                  type="search"
+                  placeholder="search for articles"
+                  className="w-full border py-1 px-2 rounded-lg outline-none"
+                />
+              </div>
               <div className="hidden sm:ml-6 mt-4 sm:flex   sm:flex-col gap-4 sm:items-center">
                 <div className=" flex">
                   {/* Profile dropdown */}

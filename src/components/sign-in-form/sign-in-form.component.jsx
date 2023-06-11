@@ -8,8 +8,16 @@ import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
 
 const SignInForm = () => {
-  const handleSubmit = (values) => {
-    console.log("form submitted", values);
+  const handleSubmit = async (values) => {
+    await fetch("http://127.0.0.1:8000/user", {
+      mode: "cors",
+      headers: {
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
   return (
     <div className="mx-auto">

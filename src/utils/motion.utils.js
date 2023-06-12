@@ -1,20 +1,20 @@
 export const profileMenuAni = {
   initial: {
     opacity: 0,
-    x: "40vh",
+    x: "30vh",
   },
   animate: {
     opacity: 1,
     x: 0,
   },
   transition: {
-    duration: 1,
+    duration: 0.2,
     type: "spring",
     stiffness: 50,
   },
   exit: {
     duration: 0,
-    x: "40vh",
+    x: "30vh",
   },
 };
 

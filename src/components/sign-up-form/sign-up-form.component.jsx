@@ -6,10 +6,15 @@ import {
 } from "../../utils/yup-validation.utils";
 import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
+import { postRequest } from "../../utils/api-utils";
 
-const SignOutForm = () => {
-  const handleSubmit = (values) => {
-    console.log("sign up form submitted", values);
+const SignUpForm = () => {
+  const handleSubmit = async (values, { resetForm }) => {
+    const { status } = await postRequest(
+      "http://127.0.0.1:8000/register",
+      values
+    );
+    status && resetForm();
   };
   return (
     <div className=" mx-auto">
@@ -52,4 +57,4 @@ const SignOutForm = () => {
     </div>
   );
 };
-export default SignOutForm;
+export default SignUpForm;

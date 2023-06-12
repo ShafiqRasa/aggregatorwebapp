@@ -1,13 +1,11 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useDispatch, useSelector } from "react-redux";
-import { setMenuOpen } from "../../store/user/user-slice";
-import { userSelector } from "../../store/user/user-selector";
+import { useContext } from "react";
+import { LayoutContext } from "../../context/layout-context";
 
 const MenuIcon = () => {
-  const dispatch = useDispatch();
-  const { isMenuOpen } = useSelector(userSelector);
+  const { isMenuOpen, setIsMenueOpen } = useContext(LayoutContext);
   const handleMenu = () => {
-    dispatch(setMenuOpen());
+    setIsMenueOpen();
   };
   return (
     <div className="flex items-center sm:hidden ">

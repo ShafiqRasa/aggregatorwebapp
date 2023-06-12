@@ -1,20 +1,18 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { menuAni } from "../../utils/motion.utils";
-import { useSelector, useDispatch } from "react-redux";
-import { userSelector } from "../../store/user/user-selector";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../utils/joiner-class.utils";
-import { navigation, userNavigation } from "../../utils/navigations.utils";
+import { navigation } from "../../utils/navigations.utils";
 import { user } from "../../utils/user-utils";
-import { setMenuOpen } from "../../store/user/user-slice";
+import { useContext } from "react";
+import { LayoutContext } from "../../context/layout-context";
 
 const MobileDeviceMenu = () => {
   const location = useLocation();
-  const { isMenuOpen } = useSelector(userSelector);
-  const dispatch = useDispatch();
+  const { isMenuOpen, setIsMenueOpen } = useContext(LayoutContext);
   useEffect(() => {
-    dispatch(setMenuOpen());
+    setIsMenueOpen();
   }, [location.pathname]);
 
   return (

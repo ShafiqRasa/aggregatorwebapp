@@ -6,18 +6,23 @@ import {
 } from "../../utils/yup-validation.utils";
 import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/user/user-slice";
+import { postRequest } from "../../utils/api-utils";
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const handleSubmit = async (values) => {
-    await fetch("http://127.0.0.1:8000/user", {
-      mode: "cors",
-      headers: {
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    try {
+      const { user, jwt } = await postRequest(
+        "http://localhost:8000/login",
+        values,
+        null
+      );
+      dispatch(setUser({ user, jwt }));
+    } catch ({ code }) {
+      console.log("error catched:", code);
+    }
   };
   return (
     <div className="mx-auto">

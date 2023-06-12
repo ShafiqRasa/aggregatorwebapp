@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Form, Formik } from "formik";
 import FormControl from "../form-control/form-control.component";
 import {
@@ -9,9 +10,17 @@ import { BUTTON_TYPES } from "../../utils/button-types.utils";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/user/user-slice";
 import { postRequest } from "../../utils/api-utils";
+import Alert from "../alert/alert-component";
+import { AnimatePresence } from "framer-motion";
+import { alertMessage } from "../../utils/default-alert.utils";
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const [alert, setAlert] = useState(alertMessage);
+  const handleDismis = () => {
+    setAlert(alertMessage);
+  };
+
   const handleSubmit = async (values) => {
     try {
       const { user, jwt } = await postRequest(
@@ -19,9 +28,22 @@ const SignInForm = () => {
         values,
         null
       );
-      dispatch(setUser({ user, jwt }));
+      if (user) {
+        dispatch(setUser({ user, jwt }));
+      } else {
+        setAlert({
+          status: false,
+          isAlert: true,
+          message: "Unauthorized",
+        });
+      }
     } catch ({ code }) {
       console.log("error catched:", code);
+      setAlert({
+        status: false,
+        isAlert: true,
+        message: "Unauthorized",
+      });
     }
   };
   return (
@@ -38,7 +60,7 @@ const SignInForm = () => {
           validationSchema={signInFormValidationSchema}
           onSubmit={handleSubmit}
         >
-          {() => {
+          {({ isSubmitting }) => {
             return (
               <Form>
                 <FormControl
@@ -53,12 +75,25 @@ const SignInForm = () => {
                   name="password"
                   label="Password"
                 />
-                <Button btnType={BUTTON_TYPES.BLACK} label="SIGN IN" />
+                <Button
+                  btnType={BUTTON_TYPES.BLACK}
+                  isSubmitting={isSubmitting}
+                  label="SIGN IN"
+                />
               </Form>
             );
           }}
         </Formik>
       </div>
+      <AnimatePresence>
+        {alert.isAlert && (
+          <Alert
+            status={alert.status}
+            message={alert.message}
+            handleDismis={handleDismis}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -11,32 +11,37 @@ import { addCategory } from "../../context/search-key.context";
 import Alert from "../alert/alert-component";
 import { alertMessage } from "../../utils/default-alert.utils";
 import { postRequest } from "../../utils/api-utils";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../store/user/user-selector";
 
 const Preferences = () => {
   const [alert, setAlert] = useState(alertMessage);
   const [src, setSrc] = useState([]);
   const [cat, setCat] = useState([]);
-  const [formDate, setFormDate] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const { user } = useSelector(userSelector);
+
   const hanldeSources = (event) => setSrc(addSrouce(src, event.target.value));
   const hanldeCategories = (event) =>
     setCat(addCategory(cat, event.target.value));
-  const handleFromDate = (event) => setFormDate(event.target.value);
+  const handleFromDate = (event) => setFromDate(event.target.value);
   const handleDismis = () => setAlert(alertMessage);
 
   const handleSubmit = async () => {
     const fields = {
       src,
       cat,
-      formDate,
+      fromDate,
     };
-    const url = "";
-    const { status } = await postRequest(url, fields, "");
-
-    if (status) {
+    const url = "http://localhost:8000/setting";
+    console.log(user.jwt);
+    const result = await postRequest(url, fields, user.jwt);
+    console.log("custome setting response ", result);
+    if (result) {
       setAlert({
         status: true,
         isAlert: true,
-        message: "Successfully, registered!",
+        message: "Successfully, custome preferences added!",
       });
     } else {
       setAlert({

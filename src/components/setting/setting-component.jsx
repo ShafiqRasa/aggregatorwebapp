@@ -1,3 +1,5 @@
+import Preferences from "../user-preferences/user-preferences.component";
+
 const Setting = () => {
   const handleSetting = () => {
     console.log("setting clicked");
@@ -24,7 +26,9 @@ const Setting = () => {
           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
         />
       </svg>
-      <div className=" border h-[50vh] shadow-md w-full  md:w-2/3 justify-self-end rounded-md"></div>
+      <div className=" border shadow-md w-full  md:w-2/3 justify-self-end rounded-md">
+        <Preferences />
+      </div>
     </div>
   );
 };

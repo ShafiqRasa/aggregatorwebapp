@@ -23,7 +23,7 @@ export const menuAni = {
     height: 0,
   },
   animate: {
-    height: "36vh",
+    height: "38vh",
   },
   transition: {
     duration: 0.5,
@@ -32,5 +32,21 @@ export const menuAni = {
   },
   exit: {
     height: 0,
+  },
+};
+
+export const filterDialogAni = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+  transition: {
+    duration: 0.5,
+    type: "spring",
+  },
+  exit: {
+    opacity: 0,
   },
 };

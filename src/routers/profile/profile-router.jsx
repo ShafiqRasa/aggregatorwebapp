@@ -14,10 +14,8 @@ const Profile = () => {
   }, [isLogin]);
 
   return (
-    <div className=" flex flex-col sm:flex-row flex-nowrap px-8">
-      <div className=" flex-1">
-        <UserProfile />
-      </div>
+    <div className=" flex flex-col sm:flex-row flex-nowrap md:px-8 min-h-screen">
+      <div className=" flex-1">{isLogin && <UserProfile />}</div>
       <div className=" flex-1">
         <Setting />
       </div>

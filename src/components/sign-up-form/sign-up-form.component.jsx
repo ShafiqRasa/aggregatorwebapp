@@ -71,11 +71,13 @@ const SignUpForm = () => {
               name="confirmPassword"
               label="Confirm Password"
             />
-            <Button
-              btnType={BUTTON_TYPES.WHITE}
-              isSubmitting={isSubmitting}
-              label="SIGN UP"
-            />
+            <div className=" mt-4">
+              <Button
+                btnType={BUTTON_TYPES.WHITE}
+                isSubmitting={isSubmitting}
+                label="SIGN UP"
+              />
+            </div>
           </Form>
         )}
       </Formik>

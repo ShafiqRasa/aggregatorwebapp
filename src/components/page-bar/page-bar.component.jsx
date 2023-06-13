@@ -43,8 +43,11 @@ const PageBar = () => {
               className="h-5 w-5 flex-shrink-0 text-gray-400"
               aria-hidden="true"
             />
-            <a className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">
-              {queryParameters.get("cat") ?? "All"}
+            <a className="ml-4 text-sm normal-case  font-medium text-gray-500 hover:text-gray-700">
+              {queryParameters.get("cat")
+                ? queryParameters.get("cat").charAt(0).toUpperCase() +
+                  queryParameters.get("cat").slice(1)
+                : "All"}
             </a>
           </div>
         </li>

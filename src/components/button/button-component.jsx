@@ -6,11 +6,20 @@ const getBtnCSSClass = (btnType = BUTTON_TYPES.BLACK) =>
     [BUTTON_TYPES.WHITE]: "white-btn",
   }[btnType]);
 
-const Button = ({ label, btnType, isSubmitting = false }) => {
+const Button = ({
+  label,
+  btnType,
+  isSubmitting = false,
+  handleSubmit = () => {},
+}) => {
   const btnClass = getBtnCSSClass(btnType);
   return (
-    <div className=" mt-4">
-      <button disabled={isSubmitting} className={`${btnClass} group`}>
+    <div className="">
+      <button
+        disabled={isSubmitting}
+        onClick={handleSubmit}
+        className={`${btnClass} group`}
+      >
         {isSubmitting ? (
           <Loading
             color={btnType === BUTTON_TYPES.WHITE ? "text-black" : "text-white"}

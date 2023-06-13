@@ -75,11 +75,13 @@ const SignInForm = () => {
                   name="password"
                   label="Password"
                 />
-                <Button
-                  btnType={BUTTON_TYPES.BLACK}
-                  isSubmitting={isSubmitting}
-                  label="SIGN IN"
-                />
+                <div className=" mt-4">
+                  <Button
+                    btnType={BUTTON_TYPES.BLACK}
+                    isSubmitting={isSubmitting}
+                    label="SIGN IN"
+                  />
+                </div>
               </Form>
             );
           }}

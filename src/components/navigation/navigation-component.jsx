@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import { navigation } from "../../utils/navigations.utils";
 import ProfileMenu from "../profile-menu/profile-menu.component";
 import MobileDeviceMenu from "../mobile-device-menu/mobile-device-menu.component";
-import { user } from "../../utils/user-utils";
 import MenuIcon from "../menu-icon/menu-icon.component";
 import { useContext } from "react";
 import { LayoutContext } from "../../context/layout-context";
@@ -13,6 +12,7 @@ import { useSelector } from "react-redux";
 import { userSelector } from "../../store/user/user-selector";
 import Logo from "../logo/logo-component";
 import { SearchContext } from "../../context/search-key.context";
+import Footer from "../footer/footer-component";
 
 const Navigation = () => {
   const { setIsProfileOpen } = useContext(LayoutContext);
@@ -54,6 +54,7 @@ const Navigation = () => {
                 <input
                   type="search"
                   onChange={setKey}
+                  disabled={location.pathname != "/articles"}
                   placeholder="search article"
                   className="w-full border py-2 px-2 rounded-lg outline-none"
                 />
@@ -65,11 +66,11 @@ const Navigation = () => {
                     {isLogin ? (
                       <button
                         onClick={handleProfileMenu}
-                        className="rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2"
                       >
                         <img
                           className="h-8 w-8 rounded-full"
-                          src={user.imageUrl}
+                          src="/assets/icons/user.png"
                           alt=""
                         />
                       </button>
@@ -95,9 +96,10 @@ const Navigation = () => {
         </>
       </div>
 
-      <div className="pt-10  z-10">
+      <div className="py-10 z-10">
         <Outlet />
       </div>
+      <Footer />
     </Fragment>
   );
 };

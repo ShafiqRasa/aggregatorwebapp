@@ -14,7 +14,7 @@ const Login = () => {
   }, [isLogin]);
 
   return (
-    <div className=" grid gap-4 grid-cols-1 md:grid-cols-2 justify-center items-start">
+    <div className=" grid gap-4 grid-cols-1 md:grid-cols-2 justify-center items-start min-h-screen">
       <SignInForm />
       <SignUpForm />
     </div>

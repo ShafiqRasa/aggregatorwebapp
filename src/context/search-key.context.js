@@ -39,14 +39,14 @@ const reducer = (state, action) => {
   }
 };
 
-const addSrouce = (sources, addSrc) => {
+export const addSrouce = (sources, addSrc) => {
   const sourceExist = sources.find((source) => source == addSrc);
   if (sourceExist) {
     return sources.filter((source) => source != addSrc && source);
   }
   return [...sources, addSrc];
 };
-const addCategory = (categories, addCat) => {
+export const addCategory = (categories, addCat) => {
   const categoryExist = categories.find((category) => category == addCat);
   if (categoryExist) {
     return categories.filter((category) => category != addCat && category);

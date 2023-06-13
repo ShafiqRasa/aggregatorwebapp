@@ -17,9 +17,7 @@ import { alertMessage } from "../../utils/default-alert.utils";
 const SignInForm = () => {
   const dispatch = useDispatch();
   const [alert, setAlert] = useState(alertMessage);
-  const handleDismis = () => {
-    setAlert(alertMessage);
-  };
+  const handleDismis = () => setAlert(alertMessage);
 
   const handleSubmit = async (values) => {
     try {

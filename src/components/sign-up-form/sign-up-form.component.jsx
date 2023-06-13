@@ -14,9 +14,7 @@ import { alertMessage } from "../../utils/default-alert.utils";
 
 const SignUpForm = () => {
   const [alert, setAlert] = useState(alertMessage);
-  const handleDismis = () => {
-    setAlert(alertMessage);
-  };
+  const handleDismis = () => setAlert(alertMessage);
   const handleSubmit = async (values, { resetForm }) => {
     const { status } = await postRequest(
       "http://127.0.0.1:8000/register",

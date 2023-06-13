@@ -15,7 +15,7 @@ const Profile = () => {
 
   return (
     <div className=" flex flex-col sm:flex-row flex-nowrap md:px-8 min-h-screen">
-      <div className=" flex-1">{isLogin && <UserProfile />}</div>
+      <div className=" flex-1 mt-2 md:pt-10">{isLogin && <UserProfile />}</div>
       <div className=" flex-1">
         <Setting />
       </div>

@@ -18,10 +18,12 @@
     "framer-motion": "^10.12.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-paginate": "^8.2.0",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
+    "tailwindcss-animation-delay": "^1.0.7",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },

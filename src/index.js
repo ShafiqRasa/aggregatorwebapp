@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./store/store";
 import { LayoutProvider } from "./context/layout-context";
 import { PersistGate } from "redux-persist/integration/react";
+import { SearchProvider } from "./context/search-key.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,7 +17,9 @@ root.render(
       <LayoutProvider>
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <App />
+            <SearchProvider>
+              <App />
+            </SearchProvider>
           </PersistGate>
         </Provider>
       </LayoutProvider>

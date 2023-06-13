@@ -12,9 +12,11 @@ import { LayoutContext } from "../../context/layout-context";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../store/user/user-selector";
 import Logo from "../logo/logo-component";
+import { SearchContext } from "../../context/search-key.context";
 
 const Navigation = () => {
   const { setIsProfileOpen } = useContext(LayoutContext);
+  const { setKey } = useContext(SearchContext);
   const { isLogin } = useSelector(userSelector);
   const location = useLocation();
   const handleProfileMenu = () => {
@@ -51,6 +53,7 @@ const Navigation = () => {
               <div className="md:w-1/3 justify-center hidden sm:flex items-center">
                 <input
                   type="search"
+                  onChange={setKey}
                   placeholder="search article"
                   className="w-full border py-2 px-2 rounded-lg outline-none"
                 />

@@ -16,10 +16,12 @@ import { preferencesSelector } from "../../store/preferences/preferences-selecto
 const FilterDialog = ({ filterDialog }) => {
   const dispatch = useDispatch();
   const { sources, categories, fromDate } = useSelector(preferencesSelector);
+  const data = useSelector(preferencesSelector);
   const handleFromDate = (event) => dispatch(setFromDate(event.target.value));
   const handleSource = (event) => {
     const addSrc = event.target.value;
     const newSrc = addSrouce(sources, addSrc);
+
     dispatch(setSource(newSrc));
   };
   const hanldeCategory = (event) => {
@@ -39,7 +41,7 @@ const FilterDialog = ({ filterDialog }) => {
               Filter by Source
             </div>
             {defaultSources.map(({ id, ...otherProps }) => {
-              const checked = sources.includes(otherProps.value);
+              const checked = sources?.includes(otherProps.value);
               return (
                 <Checkbox
                   key={id}
@@ -67,7 +69,7 @@ const FilterDialog = ({ filterDialog }) => {
           </div>
           <div className="mt-6 space-y-2">
             {defaultCategories.map(({ id, ...otherProps }) => {
-              const checked = categories.includes(otherProps.value);
+              const checked = categories?.includes(otherProps.value);
               return (
                 <Checkbox
                   key={id}

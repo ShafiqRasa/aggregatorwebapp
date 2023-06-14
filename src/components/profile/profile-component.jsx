@@ -31,8 +31,8 @@ const UserProfile = () => {
         <div className="w-full flex flex-col sm:flex-row justify-evenly items-center sm:items-start gap-6">
           <dl>
             <dt>Sources</dt>
-            {sources.length > 0 ? (
-              sources.map((ar) => <dd key={ar}>- {ar}</dd>)
+            {sources ? (
+              sources?.map((ar) => <dd key={ar}>- {ar}</dd>)
             ) : (
               <dd>- All set by default</dd>
             )}

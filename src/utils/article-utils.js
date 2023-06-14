@@ -3,7 +3,7 @@ export const defaultCategories = [
   { id: 2, label: "Economey", value: "Economey" },
   { id: 3, label: "Immigration", value: "Immigration" },
   { id: 4, label: "Politic", value: "Politic" },
-  { id: 5, label: "Footbal", value: "Footbal" },
+  { id: 5, label: "Footbal", value: "Football" },
 ];
 export const defaultSources = [
   { id: 1, label: "Guardian", value: "Guardian" },

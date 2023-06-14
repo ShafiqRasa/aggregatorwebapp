@@ -1,18 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { menuAni } from "../../utils/motion.utils";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../utils/joiner-class.utils";
 import { navigation } from "../../utils/navigations.utils";
-import { useContext } from "react";
 import { LayoutContext } from "../../context/layout-context";
 import { userSelector } from "../../store/user/user-selector";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../store/user/user-slice";
+import { SearchContext } from "../../context/search-key.context";
 
 const MobileDeviceMenu = () => {
   const location = useLocation();
   const { isMenuOpen, setIsMenueOpen } = useContext(LayoutContext);
+  const { setKey } = useContext(SearchContext);
   const { isLogin, user, setIsProfileOpen } = useSelector(userSelector);
   const dispatch = useDispatch();
 
@@ -34,6 +35,7 @@ const MobileDeviceMenu = () => {
           <div className="w-full mr-16 my-4 flex justify-center items-center">
             <input
               type="search"
+              onChange={setKey}
               placeholder="search for articles"
               className="w-full border py-1 px-2 rounded-md outline-none mx-4"
             />

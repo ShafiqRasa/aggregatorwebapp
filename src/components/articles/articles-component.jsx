@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import ReactPaginate from "react-paginate";
 import { classNames } from "../../utils/joiner-class.utils";
-// import { getRequest } from "../../utils/api-utils";
 import axios from "axios";
 import Article from "../article/article-component";
 import BounceLoader from "../bounc-loader/bounc-loader.component";
@@ -9,8 +8,6 @@ import { SearchContext } from "../../context/search-key.context";
 import PageBar from "../page-bar/page-bar.component";
 import { FunnelIcon } from "@heroicons/react/20/solid";
 import FilterDialog from "../filter-dialog-box/filter-dialog-box.component";
-import { motion } from "framer-motion";
-import { Dialog } from "@headlessui/react";
 import { useSelector } from "react-redux";
 import { preferencesSelector } from "../../store/preferences/preferences-selector";
 
@@ -21,27 +18,24 @@ const Articles = () => {
   const { key } = useContext(SearchContext);
   const { fromDate, sources, categories } = useSelector(preferencesSelector);
 
-  // const API_KEY = "9bcab1f3-c60b-48a4-bda7-2404d5b0ce93";
-  // const getArticles = async (page = 1, date = "") => {
-  //   setLoading(true);
-  //   await axios
-  //     .get(
-  //       `https://content.guardianapis.com/search?api-key=${API_KEY}&page=${page}&q=${key}&${
-  //         date && "from-date=".date
-  //       }`
-  //     )
-  //     .then((response) => setArticles(response.data.response));
-  //   setLoading(false);
-  // };
-  const handlePageClick = (event) => {
-    // getArticles(event.selected + 1);
+  const getArticles = async (url) => {
+    setLoading(true);
+    await axios
+      .get(url)
+      .then((response) => setArticles(response.data.response))
+      .catch((error) => console.log(error));
+    setLoading(false);
   };
-  // useEffect(() => {
-  //   getArticles(1);
-  // }, []);
-  // useEffect(() => {
-  //   getArticles(1);
-  // }, [key]);
+  const handlePageClick = (event) => {
+    const page = event.selected + 1;
+    const url = `${process.env.REACT_APP_GUARDIAN_API}page=${page}&q=${key}&from-date=${fromDate}`;
+    getArticles(url);
+  };
+
+  useEffect(() => {
+    const url = `${process.env.REACT_APP_GUARDIAN_API}page=1&&q=${key}&from-date=${fromDate}`;
+    getArticles(url);
+  }, [key, fromDate]);
 
   return (
     <div className=" relative">
@@ -72,17 +66,21 @@ const Articles = () => {
         <div className="  my-10">
           <ReactPaginate
             breakLabel="..."
-            nextLabel="next >"
+            nextLabel={!loading && <span>next</span>}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={articles.total}
-            previousLabel="< back"
+            previousLabel={!loading && <span>back</span>}
             renderOnZeroPageCount={null}
             containerClassName=" flex justify-center my-4 items-center"
             pageClassName=""
             pageLinkClassName="border mx-1 p-2 rounded hover:shadow-lg"
-            nextLinkClassName="border p-2 border rounded hover:shadow-lg"
-            previousLinkClassName="border p-2 border rounded hover:shadow-lg"
+            nextLinkClassName={classNames(
+              !loading && "border p-2 border rounded hover:shadow-lg"
+            )}
+            previousLinkClassName={classNames(
+              !loading && "border p-2 border rounded hover:shadow-lg"
+            )}
             activeLinkClassName="bg-blue-600 text-white p-2"
             disabledClassName=" hover:bg-blue-gray-200 hover:opacity-50 hover:cursor-not-allowed"
             disabledLinkClassName="hover:cursor-not-allowed"

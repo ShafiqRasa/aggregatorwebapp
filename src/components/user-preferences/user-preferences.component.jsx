@@ -80,7 +80,7 @@ const Preferences = () => {
                 Pereferred Sources
               </div>
               {defaultSources.map(({ id, ...otherProps }) => {
-                const checked = sources.includes(otherProps.value);
+                const checked = sources?.includes(otherProps.value);
                 return (
                   <Checkbox
                     key={id}
@@ -108,7 +108,7 @@ const Preferences = () => {
             </div>
             <div className="mt-6 space-y-2">
               {defaultCategories.map(({ id, ...otherProps }) => {
-                const checked = categories.includes(otherProps.value);
+                const checked = categories?.includes(otherProps.value);
                 return (
                   <Checkbox
                     key={id}

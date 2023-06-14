@@ -9,14 +9,14 @@ const INITIAL_VALUE = {
 export const addSrouce = (sources, addSrc) => {
   const sourceExist = sources.find((source) => source == addSrc);
   if (sourceExist) {
-    return sources.filter((source) => source != addSrc && source);
+    return sources?.filter((source) => source != addSrc && source);
   }
   return [...sources, addSrc];
 };
 export const addCategory = (categories, addCat) => {
   const categoryExist = categories.find((category) => category == addCat);
   if (categoryExist) {
-    return categories.filter((category) => category != addCat && category);
+    return categories?.filter((category) => category != addCat && category);
   }
   return [...categories, addCat];
 };

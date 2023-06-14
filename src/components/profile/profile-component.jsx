@@ -1,9 +1,11 @@
 import { StarIcon } from "@heroicons/react/20/solid";
 import { userSelector } from "../../store/user/user-selector";
 import { useSelector } from "react-redux";
+import { preferencesSelector } from "../../store/preferences/preferences-selector";
 
 const UserProfile = () => {
   const { user } = useSelector(userSelector);
+  const { sources, categories, fromDate } = useSelector(preferencesSelector);
   const { name, email } = user.user;
   return (
     <div className="mx-auto">
@@ -20,10 +22,33 @@ const UserProfile = () => {
       <div className=" mt-10 flex flex-col justify-center items-center">
         <h2>{name}</h2>
         <p>{email}</p>
-        <div className=" flex justify-center my-2">
+        <div className=" flex justify-center my-4">
           {[0, 1, 2, 3, 4].map((num) => (
             <StarIcon key={num} className="h-5 w-5 flex-shrink-0 text-black" />
           ))}
+        </div>
+        <p className="mb-4">Your Customized setting are as below:</p>
+        <div className="w-full flex flex-col sm:flex-row justify-evenly items-center sm:items-start gap-6">
+          <dl>
+            <dt>Sources</dt>
+            {sources.length > 0 ? (
+              sources.map((ar) => <dd key={ar}>- {ar}</dd>)
+            ) : (
+              <dd>- All set by default</dd>
+            )}
+          </dl>
+          {categories && (
+            <dl>
+              <dt>Categories</dt>
+              {categories?.map((category, index) => (
+                <dd key={category}>- {category}</dd>
+              ))}
+            </dl>
+          )}
+          <dl>
+            <dt>From Date</dt>
+            {fromDate && <dd>- {fromDate}</dd>}
+          </dl>
         </div>
       </div>
     </div>

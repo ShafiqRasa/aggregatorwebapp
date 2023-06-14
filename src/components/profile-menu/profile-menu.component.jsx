@@ -5,11 +5,13 @@ import { useContext } from "react";
 import { LayoutContext } from "../../context/layout-context";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/user/user-slice";
+import { setAll } from "../../store/preferences/preferences-slice";
 
 const ProfileMenu = () => {
   const { isProfileOpen, setIsProfileOpen } = useContext(LayoutContext);
   const dispatch = useDispatch();
   const handleLogeOut = () => {
+    dispatch(setAll({ sources: [], categories: [], formData: "" }));
     dispatch(setUser({}));
     setIsProfileOpen();
   };

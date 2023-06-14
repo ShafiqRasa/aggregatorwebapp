@@ -21,12 +21,10 @@ const SignInForm = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const { user, jwt } = await postRequest(
-        "http://localhost:8000/login",
-        values,
-        null
-      );
-      if (user) {
+      const { data, status } = await postRequest("login", values, null);
+
+      if (status) {
+        const { user, jwt } = data;
         dispatch(setUser({ user, jwt }));
       } else {
         setAlert({

@@ -44,12 +44,10 @@ const Articles = () => {
     <div className=" relative">
       <div className="w-full my-4 flex justify-between">
         <PageBar />
-        {key && (
-          <FunnelIcon
-            onClick={() => setFilterDialog(!filterDialog)}
-            className=" w-6 h-6 text-blue-500 hover:cursor-pointer"
-          />
-        )}
+        <FunnelIcon
+          onClick={() => setFilterDialog(!filterDialog)}
+          className=" w-6 h-6 text-blue-500 hover:cursor-pointer"
+        />
       </div>
       <div className=" min-h-[70vh] flex flex-col gap-y-8 justify-center items-center">
         <ul

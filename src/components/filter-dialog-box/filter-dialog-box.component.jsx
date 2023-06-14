@@ -1,14 +1,32 @@
-import { useContext } from "react";
 import { motion } from "framer-motion";
-import { categories, sources } from "../../utils/article-utils";
+import { defaultCategories, defaultSources } from "../../utils/article-utils";
 import { filterDialogAni } from "../../utils/motion.utils";
 import Checkbox from "../checkbox/checkbox-component";
 import Date from "../date/date-component";
-import { SearchContext } from "../../context/search-key.context";
+import {
+  setFromDate,
+  addSrouce,
+  setSource,
+  setCategory,
+  addCategory,
+} from "../../store/preferences/preferences-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { preferencesSelector } from "../../store/preferences/preferences-selector";
 
 const FilterDialog = ({ filterDialog }) => {
-  const { setSources, setCategories, setFromDate } = useContext(SearchContext);
-
+  const dispatch = useDispatch();
+  const { sources, categories, fromDate } = useSelector(preferencesSelector);
+  const handleFromDate = (event) => dispatch(setFromDate(event.target.value));
+  const handleSource = (event) => {
+    const addSrc = event.target.value;
+    const newSrc = addSrouce(sources, addSrc);
+    dispatch(setSource(newSrc));
+  };
+  const hanldeCategory = (event) => {
+    const addCat = event.target.value;
+    const newCat = addCategory(categories, addCat);
+    dispatch(setCategory(newCat));
+  };
   return (
     filterDialog && (
       <motion.div
@@ -20,15 +38,19 @@ const FilterDialog = ({ filterDialog }) => {
             <div className="text-lg font-semibold leading-6 text-white mb-2">
               Filter by Source
             </div>
-            {sources.map(({ id, ...otherProps }) => (
-              <Checkbox key={id} {...otherProps} handleCheckbox={setSources} />
+            {defaultSources.map(({ id, ...otherProps }) => (
+              <Checkbox
+                key={id}
+                {...otherProps}
+                handleCheckbox={handleSource}
+              />
             ))}
           </div>
           <div>
             <div className="text-lg font-semibold leading-6 text-white">
               Filter by date
             </div>
-            <Date name="from_date" handleDate={setFromDate} />
+            <Date name="from_date" handleDate={handleFromDate} />
           </div>
         </div>
         <div>
@@ -36,11 +58,11 @@ const FilterDialog = ({ filterDialog }) => {
             Filter by category
           </div>
           <div className="mt-6 space-y-2">
-            {categories.map(({ id, ...otherProps }) => (
+            {defaultCategories.map(({ id, ...otherProps }) => (
               <Checkbox
                 key={id}
                 {...otherProps}
-                handleCheckbox={setCategories}
+                handleCheckbox={hanldeCategory}
               />
             ))}
           </div>

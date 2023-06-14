@@ -38,19 +38,27 @@ const FilterDialog = ({ filterDialog }) => {
             <div className="text-lg font-semibold leading-6 text-white mb-2">
               Filter by Source
             </div>
-            {defaultSources.map(({ id, ...otherProps }) => (
-              <Checkbox
-                key={id}
-                {...otherProps}
-                handleCheckbox={handleSource}
-              />
-            ))}
+            {defaultSources.map(({ id, ...otherProps }) => {
+              const checked = sources.includes(otherProps.value);
+              return (
+                <Checkbox
+                  key={id}
+                  {...otherProps}
+                  handleCheckbox={handleSource}
+                  checked={checked}
+                />
+              );
+            })}
           </div>
           <div>
             <div className="text-lg font-semibold leading-6 text-white">
               Filter by date
             </div>
-            <Date name="from_date" handleDate={handleFromDate} />
+            <Date
+              name="from_date"
+              handleDate={handleFromDate}
+              value={fromDate}
+            />
           </div>
         </div>
         <div>
@@ -58,13 +66,17 @@ const FilterDialog = ({ filterDialog }) => {
             Filter by category
           </div>
           <div className="mt-6 space-y-2">
-            {defaultCategories.map(({ id, ...otherProps }) => (
-              <Checkbox
-                key={id}
-                {...otherProps}
-                handleCheckbox={hanldeCategory}
-              />
-            ))}
+            {defaultCategories.map(({ id, ...otherProps }) => {
+              const checked = categories.includes(otherProps.value);
+              return (
+                <Checkbox
+                  key={id}
+                  {...otherProps}
+                  handleCheckbox={hanldeCategory}
+                  checked={checked}
+                />
+              );
+            })}
           </div>
         </div>
       </motion.div>

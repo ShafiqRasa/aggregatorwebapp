@@ -7,7 +7,7 @@ const getHeader = (token) => {
     return {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Authorization: `Bearer 6|doR359sDWAhxwNnlPjyHDzmTzeHzYbhR2oHDTc8c`,
+      Authorization: `Bearer ${token}`,
     };
   } else {
     return {
@@ -25,9 +25,8 @@ export const postRequest = async (url, data, token = null) =>
     .catch((error) => console.log(error));
 
 export const getRequest = async (url, token) => {
-  console.log(getHeader(token));
   return await axios
-    .get(`${baseUrl}${url}`, null, { headers: getHeader(token) })
+    .get(`${baseUrl}${url}`, { headers: getHeader(token) })
     .then((res) => res.data)
     .catch((error) => console.log(error));
 };

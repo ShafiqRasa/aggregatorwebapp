@@ -18,9 +18,9 @@ function App() {
 
   useEffect(() => {
     const getPreferences = async () => {
-      const pref = await getRequest("preferences", jwt);
-      console.log(pref);
-      // dispatch(setAll({sources}))
+      const { data } = await getRequest("preferences", jwt);
+      const { sources, categories, fromDate } = data;
+      dispatch(setAll({ sources, categories, fromDate }));
     };
     isLogin && getPreferences();
   }, []);

@@ -1,4 +1,4 @@
-const Checkbox = ({ label, name, value, handleCheckbox }) => {
+const Checkbox = ({ label, name, value, handleCheckbox, checked }) => {
   return (
     <div className="relative flex gap-x-3">
       <div className="flex h-6 items-center">
@@ -7,6 +7,7 @@ const Checkbox = ({ label, name, value, handleCheckbox }) => {
           type="checkbox"
           onChange={handleCheckbox}
           value={value}
+          checked={checked}
           className="h-4 w-4 rounded border-gray-300 text-white-600 focus:ring-red-600"
         />
       </div>

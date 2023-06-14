@@ -11,44 +11,45 @@ import { alertMessage } from "../../utils/default-alert.utils";
 import { postRequest } from "../../utils/api-utils";
 import { useSelector, useDispatch } from "react-redux";
 import { userSelector } from "../../store/user/user-selector";
+import { preferencesSelector } from "../../store/preferences/preferences-selector";
+import {
+  setSource,
+  setCategory,
+  setFromDate,
+} from "../../store/preferences/preferences-slice";
 import {
   addSrouce,
   addCategory,
-  setAll,
 } from "../../store/preferences/preferences-slice";
 
 const Preferences = () => {
   const [alert, setAlert] = useState(alertMessage);
-  const [src, setSrc] = useState([]);
-  const [cat, setCat] = useState([]);
-  const [fDate, setFromDate] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
+  const { sources, categories, fromDate } = useSelector(preferencesSelector);
 
-  const hanldeSources = (event) => setSrc(addSrouce(src, event.target.value));
-  const hanldeCategories = (event) =>
-    setCat(addCategory(cat, event.target.value));
-  const handleFromDate = (event) => setFromDate(event.target.value);
+  const hanldeSources = (event) => {
+    const newSrc = addSrouce(sources, event.target.value);
+    dispatch(setSource(newSrc));
+  };
+  const hanldeCategories = (event) => {
+    const newCat = addCategory(categories, event.target.value);
+    dispatch(setCategory(newCat));
+  };
+
+  const handleFromDate = (event) => dispatch(setFromDate(event.target.value));
   const handleDismis = () => setAlert(alertMessage);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
     const fields = {
-      src,
-      cat,
-      fromDate: fDate,
+      src: sources,
+      cat: categories,
+      fromDate,
     };
-    console.log(user.jwt);
     const result = await postRequest("setting", fields, user.jwt);
     if (result) {
-      dispatch(
-        setAll({
-          sources: src,
-          categories: cat,
-          fromDate: fDate,
-        })
-      );
       setAlert({
         status: true,
         isAlert: true,
@@ -78,19 +79,27 @@ const Preferences = () => {
               <div className="text-md font-semibold leading-6 text-white mb-2">
                 Pereferred Sources
               </div>
-              {defaultSources.map(({ id, ...otherProps }) => (
-                <Checkbox
-                  key={id}
-                  {...otherProps}
-                  handleCheckbox={hanldeSources}
-                />
-              ))}
+              {defaultSources.map(({ id, ...otherProps }) => {
+                const checked = sources.includes(otherProps.value);
+                return (
+                  <Checkbox
+                    key={id}
+                    {...otherProps}
+                    handleCheckbox={hanldeSources}
+                    checked={checked}
+                  />
+                );
+              })}
             </div>
             <div>
               <div className="text-md font-semibold leading-6 text-white">
                 From Date
               </div>
-              <Date name="from_date" handleDate={handleFromDate} />
+              <Date
+                name="from_date"
+                handleDate={handleFromDate}
+                value={fromDate}
+              />
             </div>
           </div>
           <div>
@@ -98,13 +107,17 @@ const Preferences = () => {
               Preferred Categories
             </div>
             <div className="mt-6 space-y-2">
-              {defaultCategories.map(({ id, ...otherProps }) => (
-                <Checkbox
-                  key={id}
-                  {...otherProps}
-                  handleCheckbox={hanldeCategories}
-                />
-              ))}
+              {defaultCategories.map(({ id, ...otherProps }) => {
+                const checked = categories.includes(otherProps.value);
+                return (
+                  <Checkbox
+                    key={id}
+                    {...otherProps}
+                    handleCheckbox={hanldeCategories}
+                    checked={checked}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

@@ -11,12 +11,15 @@ import { FunnelIcon } from "@heroicons/react/20/solid";
 import FilterDialog from "../filter-dialog-box/filter-dialog-box.component";
 import { motion } from "framer-motion";
 import { Dialog } from "@headlessui/react";
+import { useSelector } from "react-redux";
+import { preferencesSelector } from "../../store/preferences/preferences-selector";
 
 const Articles = () => {
   const [articles, setArticles] = useState({});
   const [filterDialog, setFilterDialog] = useState(false);
   const [loading, setLoading] = useState(true);
   const { key } = useContext(SearchContext);
+  const { fromDate, sources, categories } = useSelector(preferencesSelector);
 
   // const API_KEY = "9bcab1f3-c60b-48a4-bda7-2404d5b0ce93";
   // const getArticles = async (page = 1, date = "") => {

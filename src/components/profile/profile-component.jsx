@@ -5,7 +5,7 @@ import { preferencesSelector } from "../../store/preferences/preferences-selecto
 
 const UserProfile = () => {
   const { user } = useSelector(userSelector);
-  const { sources, categories, fromDate } = useSelector(preferencesSelector);
+  const { categories, fromDate } = useSelector(preferencesSelector);
   const { name, email } = user.user;
   return (
     <div className="mx-auto">
@@ -31,17 +31,19 @@ const UserProfile = () => {
         <div className="w-full flex flex-col sm:flex-row justify-evenly items-center sm:items-start gap-6">
           <dl>
             <dt>Sources</dt>
-            {sources ? (
+            <dd>- Guardian API</dd>
+            {/* shown the source of articles */}
+            {/* {sources ? (
               sources?.map((ar) => <dd key={ar}>- {ar}</dd>)
             ) : (
               <dd>- All set by default</dd>
-            )}
+            )} */}
           </dl>
           {categories && (
             <dl>
               <dt>Categories</dt>
               {categories?.map((category, index) => (
-                <dd key={category}>- {category}</dd>
+                <dd key={index}>- {category}</dd>
               ))}
             </dl>
           )}

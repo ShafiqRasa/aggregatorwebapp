@@ -13,14 +13,18 @@ import { userSelector } from "./store/user/user-selector";
 
 function App() {
   const { user, isLogin } = useSelector(userSelector);
-  const { jwt } = user;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     const getPreferences = async () => {
-      const { data } = await getRequest("preferences", jwt);
-      const { sources, categories, fromDate } = data;
-      dispatch(setAll({ sources, categories, fromDate }));
+      const { jwt } = user;
+      const sett = await getRequest("preferences", jwt);
+
+      if (sett) {
+        const { categories, fromDate } = sett.data;
+        dispatch(setAll({ categories, fromDate }));
+      }
     };
     isLogin && getPreferences();
   }, []);

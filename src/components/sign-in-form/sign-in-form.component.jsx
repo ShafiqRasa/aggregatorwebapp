@@ -30,15 +30,14 @@ const SignInForm = () => {
         setAlert({
           status: false,
           isAlert: true,
-          message: "Unauthorized",
+          message: "Wrong credentials",
         });
       }
     } catch ({ code }) {
-      console.log("error catched:", code);
       setAlert({
         status: false,
         isAlert: true,
-        message: "Unauthorized",
+        message: "Wrong credentials",
       });
     }
   };

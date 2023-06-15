@@ -10,11 +10,6 @@ const Article = ({ webTitle, webPublicationDate, webUrl }) => {
       className=" hover:border hover:border-blue-700 hover:scale-95 hover:transition-all duration-100 ease-in hover:cursor-pointer col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-start shadow"
     >
       <div className="flex flex-1 flex-col p-8">
-        {/* <img
-          className="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
-          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-          alt=""
-        /> */}
         <dl className="mt-1 flex flex-grow flex-col justify-start items-start">
           <dd className="text-sm font-semibold text-gray-900">{webTitle}</dd>
         </dl>

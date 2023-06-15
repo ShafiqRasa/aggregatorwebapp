@@ -5,5 +5,5 @@ export const navigation = [
 
 export const userNavigation = [
   { id: 1, name: "Your Profile", href: "profile" },
-  { id: 3, name: "Sign out", href: "#" },
+  { id: 2, name: "Sign out", href: "#" },
 ];

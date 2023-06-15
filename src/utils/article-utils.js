@@ -1,12 +1,14 @@
 export const defaultCategories = [
-  { id: 1, label: "Education", value: "Education" },
-  { id: 2, label: "Economey", value: "Economey" },
-  { id: 3, label: "Immigration", value: "Immigration" },
-  { id: 4, label: "Politic", value: "Politic" },
-  { id: 5, label: "Footbal", value: "Football" },
+  { id: 1, label: "Education", value: "Education", imgUrl: "education.jpg" },
+  { id: 2, label: "Economey", value: "Economey", imgUrl: "economey.jpg" },
+  {
+    id: 3,
+    label: "Immigration",
+    value: "Immigration",
+    imgUrl: "immigration.jpg",
+  },
+  { id: 4, label: "Politic", value: "Politic", imgUrl: "politic.jpg" },
+  { id: 5, label: "Footbal", value: "Football", imgUrl: "football.jpg" },
 ];
-export const defaultSources = [
-  { id: 1, label: "Guardian", value: "Guardian" },
-  { id: 2, label: "CNN", value: "CNN" },
-  { id: 3, label: "News Credit", value: "News Credit" },
-];
+
+export const defaultSources = [{ id: 1, label: "Guardian", value: "Guardian" }];

@@ -27,7 +27,7 @@ const Navigation = () => {
     <Fragment>
       <div className=" bg-white shadow-sm w-full">
         <>
-          {/* nav for mediom and larg devices */}
+          {/* nav for madiam and large devices */}
           <div className="mx-auto sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
@@ -97,7 +97,9 @@ const Navigation = () => {
       </div>
 
       <div className="py-10 z-10">
+        {/*  Start content */}
         <Outlet />
+        {/* end content */}
       </div>
       <Footer />
     </Fragment>

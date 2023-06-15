@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_VALUE = {
   fromDate: "",
-  sources: [],
+  sources: ["Guardian"],
   categories: [],
 };
 
@@ -42,7 +42,6 @@ export const preferencesSlice = createSlice({
     },
     setAll(state, action) {
       {
-        state.sources = action.payload.sources;
         state.categories = action.payload.categories;
         state.fromDate = action.payload.fromDate;
       }

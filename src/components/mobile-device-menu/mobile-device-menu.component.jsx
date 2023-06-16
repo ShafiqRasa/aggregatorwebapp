@@ -1,19 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { menuAni } from "../../utils/motion.utils";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../utils/joiner-class.utils";
 import { navigation } from "../../utils/navigations.utils";
-import { useContext } from "react";
 import { LayoutContext } from "../../context/layout-context";
 import { userSelector } from "../../store/user/user-selector";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../store/user/user-slice";
+import { SearchContext } from "../../context/search-key.context";
 
 const MobileDeviceMenu = () => {
   const location = useLocation();
-  const { isMenuOpen, setIsMenueOpen } = useContext(LayoutContext);
-  const { isLogin, user, setIsProfileOpen } = useSelector(userSelector);
+  const { isMenuOpen, setIsMenueOpen, setIsProfileOpen } =
+    useContext(LayoutContext);
+  const { setKey } = useContext(SearchContext);
+  const { isLogin, user } = useSelector(userSelector);
   const dispatch = useDispatch();
 
   const handleLogeOut = () => {
@@ -32,13 +34,18 @@ const MobileDeviceMenu = () => {
           className="sm:hidden overflow-hidden bg-white h-[50vh]"
         >
           <div className="w-full mr-16 my-4 flex justify-center items-center">
+            {/* search bar, search based on user inputs */}
             <input
               type="search"
+              onChange={setKey}
+              disabled={location.pathname != "/articles"}
               placeholder="search for articles"
               className="w-full border py-1 px-2 rounded-md outline-none mx-4"
             />
+            {/* end */}
           </div>
           <div className="space-y-1 pb-3 pt-2">
+            {/* Nav bar menus */}
             {navigation.map(({ id, name, href }) => (
               <Link
                 key={id}
@@ -56,10 +63,12 @@ const MobileDeviceMenu = () => {
                 {name}
               </Link>
             ))}
+            {/* end */}
           </div>
 
           <div className="border-t border-gray-200 pb-3 pt-4 ">
             <div className=" mb-2">
+              {/* on nav bar, sign in and sign out buttons rendered conditionaly */}
               {isLogin ? (
                 <button
                   onClick={handleLogeOut}
@@ -75,7 +84,9 @@ const MobileDeviceMenu = () => {
                   SIGN IN
                 </Link>
               )}
+              {/* end */}
             </div>
+            {/* if the user authenticated, give access to the user preferences section */}
             {isLogin && (
               <div className="flex items-center px-4">
                 <div className="flex-shrink-0 border border-blue-500 rounded-full p-1 ">
@@ -98,6 +109,7 @@ const MobileDeviceMenu = () => {
                 </div>
               </div>
             )}
+            {/* end */}
           </div>
         </motion.div>
       )}

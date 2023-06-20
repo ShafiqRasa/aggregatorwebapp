@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { LayoutContext } from "../../context/layout-context";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/user/user-slice";
+import { signOut } from "../../store/user/user-slice";
 import { setAll } from "../../store/preferences/preferences-slice";
 
 const ProfileMenu = () => {
@@ -12,7 +12,7 @@ const ProfileMenu = () => {
   const dispatch = useDispatch();
   const handleLogeOut = () => {
     dispatch(setAll({ sources: [], categories: [], formData: "" }));
-    dispatch(setUser({}));
+    dispatch(signOut());
     setIsProfileOpen();
   };
   return (

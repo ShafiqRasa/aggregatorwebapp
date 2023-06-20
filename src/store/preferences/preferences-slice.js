@@ -4,6 +4,7 @@ const INITIAL_VALUE = {
   fromDate: "",
   sources: ["Guardian"],
   categories: [],
+  error: null,
 };
 
 export const addSrouce = (sources, addSrc) => {
@@ -46,9 +47,14 @@ export const preferencesSlice = createSlice({
         state.fromDate = action.payload.fromDate;
       }
     },
+    setAllFailed(state, action) {
+      {
+        state.error = action.payload;
+      }
+    },
   },
 });
-export const { setFromDate, setSource, setCategory, setAll } =
+export const { setFromDate, setSource, setCategory, setAll, setAllFailed } =
   preferencesSlice.actions;
 
 export const preferencesReducer = preferencesSlice.reducer;

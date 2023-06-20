@@ -1,17 +1,12 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import { configureStore } from "@reduxjs/toolkit";
+import { loggerMiddleware } from "./middleware/logger";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { rootReducer } from "./rootReducer";
+import createSagaMiddleware from "redux-saga";
+import { rootSaga } from "./root-saga";
 
+const sagaMiddleware = createSagaMiddleware();
 const persistCinfiguration = {
   key: "root",
   storage,
@@ -21,13 +16,12 @@ const persistedReducer = persistReducer(persistCinfiguration, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  // to avoid non-serialized data wrning I use getDefaultMiddleware to ignore serialized check middleware
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  middleware: [
+    process.env.NODE_ENV !== "production" && loggerMiddleware,
+    sagaMiddleware,
+  ],
 });
 
 export const persistor = persistStore(store);
+
+sagaMiddleware.run(rootSaga);

@@ -22,7 +22,7 @@ export const postRequest = async (url, data, token = null) =>
       headers: getHeader(token),
     })
     .then((res) => res.data)
-    .catch((error) => console.log(error));
+    .catch((error) => error);
 
 export const getRequest = async (url, token) => {
   return await axios

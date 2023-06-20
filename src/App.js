@@ -10,9 +10,11 @@ import { setAll } from "./store/preferences/preferences-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { getRequest } from "./utils/api-utils";
 import { userSelector } from "./store/user/user-selector";
+import { preferencesSelector } from "./store/preferences/preferences-selector";
 
 function App() {
   const { user, isLogin } = useSelector(userSelector);
+  const {} = useSelector(preferencesSelector);
 
   const dispatch = useDispatch();
 

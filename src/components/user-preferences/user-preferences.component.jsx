@@ -5,40 +5,44 @@ import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
 import Alert from "../alert/alert-component";
 import { alertMessage } from "../../utils/default-alert.utils";
-import { postRequest } from "../../utils/api-utils";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../store/user/user-selector";
 import { preferencesSelector } from "../../store/preferences/preferences-selector";
 import FilterDialog from "../filter-dialog-box/filter-dialog-box.component";
+import { useDispatch } from "react-redux";
+import { setPreferences } from "../../store/preferences/preference-actions";
 
 const Preferences = () => {
   const [alert, setAlert] = useState(alertMessage);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
   const { sources, categories, fromDate } = useSelector(preferencesSelector);
   const handleDismis = () => setAlert(alertMessage);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsSubmitting(true);
     const fields = {
       src: sources,
       cat: categories,
       fromDate,
     };
-    const result = await postRequest("setting", fields, user.jwt);
-    if (result) {
+    const jwt = user.jwt;
+    try {
+      dispatch(setPreferences({ fields, jwt }));
       setAlert({
         status: true,
         isAlert: true,
         message: "Successfully, custome preferences added!",
       });
-    } else {
+    } catch (error) {
       setAlert({
         status: false,
         isAlert: true,
         message: "Something went wrong!",
       });
     }
+
     setIsSubmitting(false);
   };
   return (

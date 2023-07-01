@@ -29,7 +29,7 @@ function App() {
       }
     };
     isLogin && getPreferences();
-  }, []);
+  }, [isLogin]);
 
   return (
     <Routes>

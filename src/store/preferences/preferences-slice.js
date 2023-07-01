@@ -52,9 +52,20 @@ export const preferencesSlice = createSlice({
         state.error = action.payload;
       }
     },
+    getPreferencesFailed(state, action) {
+      {
+        state.error = action.payload;
+      }
+    },
   },
 });
-export const { setFromDate, setSource, setCategory, setAll, setAllFailed } =
-  preferencesSlice.actions;
+export const {
+  setFromDate,
+  setSource,
+  setCategory,
+  setAll,
+  setAllFailed,
+  getPreferencesFailed,
+} = preferencesSlice.actions;
 
 export const preferencesReducer = preferencesSlice.reducer;

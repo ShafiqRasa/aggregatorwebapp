@@ -1,9 +1,13 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { PREFERENCE_ACTION_TYPES } from "./preference-types";
-import { postRequest } from "../../utils/api-utils";
-import { setAllFailed } from "./preferences-slice";
+import { getRequest, postRequest } from "../../utils/api-utils";
+import {
+  setAllFailed,
+  getPreferencesFailed,
+  setAll,
+} from "./preferences-slice";
 
-/**** START ** set preferences */
+/**** START ** set preferences to the database */
 export function* setPreferences({ payload: { fields, jwt } }) {
   try {
     yield call(postRequest, "setting", fields, jwt);
@@ -20,6 +24,26 @@ export function* onSetPreferences() {
 }
 /**** END ** set preferences */
 
+/** START ** get preferences from database */
+export function* getPreferences({ payload: { jwt } }) {
+  try {
+    const {
+      data: { categories, fromDate },
+    } = yield call(getRequest, "preferences", jwt);
+    yield put(setAll({ categories, fromDate }));
+  } catch (error) {
+    yield put(getPreferencesFailed(error));
+  }
+}
+
+export function* onGetPreferences() {
+  yield takeLatest(
+    PREFERENCE_ACTION_TYPES.GET_PREFERENCES_START,
+    getPreferences
+  );
+}
+/** END ** get preferences from database */
+
 export function* preferenceSaga() {
-  yield all([call(onSetPreferences)]);
+  yield all([call(onSetPreferences), call(onGetPreferences)]);
 }

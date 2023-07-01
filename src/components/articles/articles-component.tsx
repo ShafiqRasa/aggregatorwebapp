@@ -12,15 +12,32 @@ import { useSelector } from "react-redux";
 import { preferencesSelector } from "../../store/preferences/preferences-selector";
 import { motion } from "framer-motion";
 import { filterDialogAni } from "../../utils/motion.utils";
+import { articleProps } from "../article/article-component";
 
+const initialArticlesValue = {
+  results: [
+    {
+      id: 0,
+      webTitle: "",
+      webPublicationDate: "",
+      webUrl: "",
+    },
+  ],
+  total: 0,
+};
+type resultType = articleProps & { id: number };
+type articles = {
+  results: resultType[];
+  total: number;
+};
 const Articles = () => {
-  const [articles, setArticles] = useState({});
+  const [articles, setArticles] = useState<articles>(initialArticlesValue);
   const [filterDialog, setFilterDialog] = useState(false);
   const [loading, setLoading] = useState(true);
   const { key } = useContext(SearchContext);
   const { fromDate, categories } = useSelector(preferencesSelector);
 
-  const getArticles = async (url) => {
+  const getArticles = async (url: string) => {
     setLoading(true);
     await axios
       .get(url)
@@ -28,7 +45,7 @@ const Articles = () => {
       .catch(({ code }) => console.log("error code:", code));
     setLoading(false);
   };
-  const handlePageClick = (event) => {
+  const handlePageClick = (event: { selected: number }) => {
     const page = event.selected + 1;
     const url = `${
       process.env.REACT_APP_GUARDIAN_API
@@ -82,7 +99,7 @@ const Articles = () => {
             <BounceLoader />
           ) : (
             articles &&
-            articles?.results?.map(({ id, ...otherProps }) => (
+            articles?.results.map(({ id, ...otherProps }) => (
               <Article key={id} {...otherProps} />
             ))
           )}
@@ -91,11 +108,11 @@ const Articles = () => {
           {/* paginated UI comes from react-pagination library */}
           <ReactPaginate
             breakLabel="..."
-            nextLabel={articles == {} ? "" : <span>next</span>}
+            nextLabel={<span>next</span>}
             onPageChange={handlePageClick}
             pageRangeDisplayed={5}
             pageCount={articles.total}
-            previousLabel={articles != {} && <span>back</span>}
+            previousLabel={<span>back</span>}
             renderOnZeroPageCount={null}
             containerClassName=" flex justify-center my-4 items-center"
             pageClassName=""

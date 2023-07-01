@@ -1,7 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userStateTypes } from "./user-types";
 
-const INITIAL_VALUES = {
-  user: {},
+const userInitialValue = {
+  user: {
+    email: "",
+    name: "",
+  },
+  jwt: "",
+};
+const INITIAL_VALUES: userStateTypes = {
+  user: userInitialValue,
   isLogin: false,
   error: null,
 };
@@ -19,7 +27,7 @@ export const userSlice = createSlice({
       state.isLogin = false;
     },
     signOut(state) {
-      state.user = {};
+      state.user = userInitialValue;
       state.isLogin = false;
     },
   },

@@ -1,4 +1,5 @@
-export const loggerMiddleware = (store) => (next) => (action) => {
+import { Middleware } from "@reduxjs/toolkit";
+export const loggerMiddleware: Middleware = (store) => (next) => (action) => {
   if (!action.type) next(action);
   console.log("type: ", action.type);
   console.log("payload: ", action.payload);

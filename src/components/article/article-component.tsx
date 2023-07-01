@@ -1,7 +1,12 @@
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
-const Article = ({ webTitle, webPublicationDate, webUrl }) => {
+export type articleProps = {
+  webTitle: string;
+  webPublicationDate: string;
+  webUrl: string;
+};
+const Article = ({ webTitle, webPublicationDate, webUrl }: articleProps) => {
   var date = new Date(webPublicationDate);
   return (
     <Link

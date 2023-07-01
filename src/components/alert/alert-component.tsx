@@ -17,7 +17,12 @@ const alertAni = {
     opacity: 0,
   },
 };
-const Alert = ({ status = true, message, handleDismis }) => {
+type alertProps = {
+  status: Boolean;
+  message: string;
+  handleDismis: () => {};
+};
+const Alert = ({ status = true, message, handleDismis }: alertProps) => {
   return (
     <motion.div
       {...alertAni}

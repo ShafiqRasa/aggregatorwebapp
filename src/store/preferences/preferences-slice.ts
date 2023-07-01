@@ -1,20 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { preferencesTypes } from "./preference-types";
 
-const INITIAL_VALUE = {
+const INITIAL_VALUE: preferencesTypes & { readonly error: Error | null } = {
   fromDate: "",
   sources: ["Guardian"],
   categories: [],
   error: null,
 };
 
-export const addSrouce = (sources, addSrc) => {
+export const addSrouce = (sources: string[], addSrc: string): string[] => {
   const sourceExist = sources.find((source) => source == addSrc);
   if (sourceExist) {
     return sources?.filter((source) => source != addSrc && source);
   }
   return [...sources, addSrc];
 };
-export const addCategory = (categories, addCat) => {
+export const addCategory = (categories: string[], addCat: string): string[] => {
   const categoryExist = categories.find((category) => category == addCat);
   if (categoryExist) {
     return categories?.filter((category) => category != addCat && category);

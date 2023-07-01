@@ -16,12 +16,15 @@ const persistedReducer = persistReducer(persistCinfiguration, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: [
-    process.env.NODE_ENV !== "production" && loggerMiddleware,
-    sagaMiddleware,
-  ],
+  middleware: [loggerMiddleware, sagaMiddleware],
+  // middleware: [
+  //   process.env.NODE_ENV !== "production" && loggerMiddleware,
+  //   sagaMiddleware,
+  // ],
 });
 
 export const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
+
+export type rootState = ReturnType<typeof store.getState>;

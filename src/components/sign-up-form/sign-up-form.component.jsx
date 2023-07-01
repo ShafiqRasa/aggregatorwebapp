@@ -7,24 +7,27 @@ import {
 } from "../../utils/yup-validation.utils";
 import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
-import { postRequest } from "../../utils/api-utils";
 import Alert from "../alert/alert-component";
 import { AnimatePresence } from "framer-motion";
 import { alertMessage } from "../../utils/default-alert.utils";
+import { useDispatch } from "react-redux";
+import { emailSignUp } from "../../store/user/user-actions";
 
 const SignUpForm = () => {
   const [alert, setAlert] = useState(alertMessage);
+  const dispatch = useDispatch();
+
   const handleDismis = () => setAlert(alertMessage);
-  const handleSubmit = async (values, { resetForm }) => {
-    const { status } = await postRequest("register", values);
-    if (status) {
+  const handleSubmit = (values, { resetForm }) => {
+    try {
+      dispatch(emailSignUp(values));
       resetForm();
       setAlert({
         status: true,
         isAlert: true,
         message: "Successfully, registered!",
       });
-    } else {
+    } catch (error) {
       setAlert({
         status: false,
         isAlert: true,

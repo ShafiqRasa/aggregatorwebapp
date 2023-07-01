@@ -22,7 +22,10 @@
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "redux-saga": "^1.2.3",
+    "reselect": "^4.1.8",
     "tailwindcss-animation-delay": "^1.0.7",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"

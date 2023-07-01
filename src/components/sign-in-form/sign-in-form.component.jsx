@@ -8,11 +8,10 @@ import {
 import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/user/user-slice";
-import { postRequest } from "../../utils/api-utils";
 import Alert from "../alert/alert-component";
 import { AnimatePresence } from "framer-motion";
 import { alertMessage } from "../../utils/default-alert.utils";
+import { emailSignIn } from "../../store/user/user-actions";
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -21,18 +20,12 @@ const SignInForm = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const { data, status } = await postRequest("login", values, null);
-
-      if (status) {
-        const { user, jwt } = data;
-        dispatch(setUser({ user, jwt }));
-      } else {
-        setAlert({
-          status: false,
-          isAlert: true,
-          message: "Wrong credentials",
-        });
-      }
+      dispatch(emailSignIn(values));
+      setAlert({
+        status: true,
+        isAlert: true,
+        message: "User signed in successfully",
+      });
     } catch ({ code }) {
       setAlert({
         status: false,

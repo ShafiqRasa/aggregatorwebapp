@@ -7,7 +7,7 @@ import { navigation } from "../../utils/navigations.utils";
 import { LayoutContext } from "../../context/layout-context";
 import { userSelector } from "../../store/user/user-selector";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../../store/user/user-slice";
+import { signOut } from "../../store/user/user-slice";
 import { SearchContext } from "../../context/search-key.context";
 
 const MobileDeviceMenu = () => {
@@ -19,7 +19,7 @@ const MobileDeviceMenu = () => {
   const dispatch = useDispatch();
 
   const handleLogeOut = () => {
-    dispatch(setUser({}));
+    dispatch(signOut());
     setIsProfileOpen();
   };
   useEffect(() => {

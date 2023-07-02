@@ -1,4 +1,3 @@
-import React from "react";
 import { classNames } from "../../utils/joiner-class.utils";
 
 const Loading = ({ size = "sm", color = " text-white" }) => {

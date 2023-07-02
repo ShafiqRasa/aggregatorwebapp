@@ -56,10 +56,11 @@ const Preferences = () => {
         <div className=" rounded-md hover:border hover:border-white mt-4  ">
           <Button
             btnType={BUTTON_TYPES.WHITE}
-            label="Submit"
             isSubmitting={isSubmitting}
             handleSubmit={handleSubmit}
-          />
+          >
+            Submit
+          </Button>
         </div>
       </motion.div>
       {alert.isAlert && (

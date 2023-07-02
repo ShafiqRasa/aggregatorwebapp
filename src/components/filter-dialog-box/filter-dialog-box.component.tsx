@@ -10,18 +10,20 @@ import {
 } from "../../store/preferences/preferences-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { preferencesSelector } from "../../store/preferences/preferences-selector";
+import { ChangeEvent } from "react";
 
-const FilterDialog = ({ title }) => {
+const FilterDialog = ({ title }: { title: string }) => {
   const dispatch = useDispatch();
   const { sources, categories, fromDate } = useSelector(preferencesSelector);
-  const handleFromDate = (event) => dispatch(setFromDate(event.target.value));
-  const handleSource = (event) => {
+  const handleFromDate = (event: ChangeEvent<HTMLInputElement>) =>
+    dispatch(setFromDate(event.target.value));
+  const handleSource = (event: ChangeEvent<HTMLInputElement>) => {
     const addSrc = event.target.value;
     const newSrc = addSrouce(sources, addSrc);
 
     dispatch(setSource(newSrc));
   };
-  const hanldeCategory = (event) => {
+  const hanldeCategory = (event: ChangeEvent<HTMLInputElement>) => {
     const addCat = event.target.value;
     const newCat = addCategory(categories, addCat);
     dispatch(setCategory(newCat));
@@ -41,6 +43,7 @@ const FilterDialog = ({ title }) => {
             return (
               <Checkbox
                 key={id}
+                name="sources"
                 {...otherProps}
                 handleCheckbox={handleSource}
                 checked={true}
@@ -63,6 +66,7 @@ const FilterDialog = ({ title }) => {
             return (
               <Checkbox
                 key={id}
+                name="categories"
                 {...otherProps}
                 handleCheckbox={hanldeCategory}
                 checked={checked}

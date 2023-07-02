@@ -67,8 +67,9 @@ const SignInForm = () => {
                   <Button
                     btnType={BUTTON_TYPES.BLACK}
                     isSubmitting={isSubmitting}
-                    label="SIGN IN"
-                  />
+                  >
+                    SIGN IN
+                  </Button>
                 </div>
               </Form>
             );

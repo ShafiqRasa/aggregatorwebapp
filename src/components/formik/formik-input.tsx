@@ -1,5 +1,11 @@
 import { Field, ErrorMessage } from "formik";
-const Input = ({ label, type, name }) => {
+export type inputProps = {
+  label: string;
+  type: string;
+  name: string;
+};
+const Input = (props: inputProps) => {
+  const { label, type, name } = props;
   return (
     <div className="form-row flex flex-col my-2">
       <label

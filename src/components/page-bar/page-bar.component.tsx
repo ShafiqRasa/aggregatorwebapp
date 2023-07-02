@@ -1,18 +1,18 @@
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { ChevronRightIcon, HomeIcon } from "@heroicons/react/20/solid";
 import { useContext } from "react";
 import { SearchContext } from "../../context/search-key.context";
-
-const pages = [
-  { name: "articles", href: "#", current: false },
-  { name: "Project Nero", href: "#", current: true },
-];
 
 const PageBar = () => {
   const { setKey } = useContext(SearchContext);
   const queryParameters = new URLSearchParams(window.location.search);
   useEffect(() => {
-    setKey({ target: { value: queryParameters.get("cat") } });
+    if (queryParameters.get("cat") != "") {
+      setKey({
+        target: { value: queryParameters.get("cat") as string },
+      } as ChangeEvent<HTMLInputElement>);
+    }
+    console.log("category shafiq", queryParameters.get("cat"));
   }, [queryParameters.get("cat")]);
 
   return (
@@ -44,10 +44,7 @@ const PageBar = () => {
               aria-hidden="true"
             />
             <a className="ml-4 text-sm normal-case  font-medium text-gray-500 hover:text-gray-700">
-              {queryParameters.get("cat")
-                ? queryParameters.get("cat").charAt(0).toUpperCase() +
-                  queryParameters.get("cat").slice(1)
-                : "All"}
+              {queryParameters.get("cat") ? queryParameters.get("cat") : "All"}
             </a>
           </div>
         </li>

@@ -70,11 +70,9 @@ const SignUpForm = () => {
               label="Confirm Password"
             />
             <div className=" mt-4">
-              <Button
-                btnType={BUTTON_TYPES.WHITE}
-                isSubmitting={isSubmitting}
-                label="SIGN UP"
-              />
+              <Button btnType={BUTTON_TYPES.WHITE} isSubmitting={isSubmitting}>
+                SIGN UP
+              </Button>
             </div>
           </Form>
         )}

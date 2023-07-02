@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-const CategoryCart = ({ label, imgUrl }) => {
+type categoryCartProps = {
+  label: string;
+  imgUrl: string;
+};
+const CategoryCart = ({ label, imgUrl }: categoryCartProps) => {
   return (
     <Link
       to={`/articles?cat=${label}`}

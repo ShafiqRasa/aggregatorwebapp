@@ -1,4 +1,19 @@
-const Checkbox = ({ label, name, value, handleCheckbox, checked }) => {
+import { ChangeEvent } from "react";
+
+type checkBoxProps = {
+  label: string;
+  name: string;
+  value: string;
+  handleCheckbox: (e: ChangeEvent<HTMLInputElement>) => void;
+  checked: boolean;
+};
+const Checkbox = ({
+  label,
+  name,
+  value,
+  handleCheckbox,
+  checked,
+}: checkBoxProps) => {
   return (
     <div className="relative flex gap-x-3">
       <div className="flex h-6 items-center">

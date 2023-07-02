@@ -1,13 +1,21 @@
+import { FC, ButtonHTMLAttributes } from "react";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
 import Loading from "../loader/loader-component";
-const getBtnCSSClass = (btnType = BUTTON_TYPES.BLACK) =>
+const getBtnCSSClass = (btnType: string = BUTTON_TYPES.BLACK) =>
   ({
     [BUTTON_TYPES.BLACK]: "black-btn",
     [BUTTON_TYPES.WHITE]: "white-btn",
   }[btnType]);
 
-const Button = ({
-  label,
+type buttonProps = {
+  label: string;
+  btnType: string;
+  isSubmitting: boolean;
+  handleSubmit: () => void;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button: FC<buttonProps> = ({
+  children,
   btnType,
   isSubmitting = false,
   handleSubmit = () => {},
@@ -25,7 +33,7 @@ const Button = ({
             color={btnType === BUTTON_TYPES.WHITE ? "text-black" : "text-white"}
           />
         ) : (
-          label
+          children
         )}
       </button>
     </div>

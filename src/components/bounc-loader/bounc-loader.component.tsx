@@ -1,5 +1,3 @@
-import React from "react";
-
 const BounceLoader = () => {
   return (
     <div className="flex justify-center items-center py-4">

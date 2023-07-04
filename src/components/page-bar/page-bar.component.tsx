@@ -12,7 +12,6 @@ const PageBar = () => {
         target: { value: queryParameters.get("cat") as string },
       } as ChangeEvent<HTMLInputElement>);
     }
-    console.log("category shafiq", queryParameters.get("cat"));
   }, [queryParameters.get("cat")]);
 
   return (

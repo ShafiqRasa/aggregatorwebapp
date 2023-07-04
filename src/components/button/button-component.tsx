@@ -1,4 +1,4 @@
-import { FC, ButtonHTMLAttributes } from "react";
+import { FC, ButtonHTMLAttributes, ReactNode } from "react";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
 import Loading from "../loader/loader-component";
 const getBtnCSSClass = (btnType: string = BUTTON_TYPES.BLACK) =>
@@ -8,10 +8,10 @@ const getBtnCSSClass = (btnType: string = BUTTON_TYPES.BLACK) =>
   }[btnType]);
 
 type buttonProps = {
-  label: string;
-  btnType: string;
-  isSubmitting: boolean;
-  handleSubmit: () => void;
+  children: ReactNode;
+  btnType?: string;
+  isSubmitting?: boolean;
+  handleSubmit?: () => void;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: FC<buttonProps> = ({

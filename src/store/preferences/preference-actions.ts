@@ -6,10 +6,8 @@ import {
 import { PREFERENCE_ACTION_TYPES, preferencesTypes } from "./preference-types";
 
 type payloadProps = {
-  payload: {
-    fields: preferencesTypes;
-    jwt: string;
-  };
+  fields: preferencesTypes;
+  jwt: string;
 };
 
 export type setPreferencesType = ActionWithPayload<

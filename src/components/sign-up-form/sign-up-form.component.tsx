@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikValues } from "formik";
 import FormControl from "../form-control/form-control.component";
 import {
   signOutFormInitialValues,
   signOutFormValidationSchema,
+  signOutFormInitialValuesType,
 } from "../../utils/yup-validation.utils";
 import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
@@ -18,7 +19,10 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
 
   const handleDismis = () => setAlert(alertMessage);
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = (
+    values: signOutFormInitialValuesType,
+    { resetForm }: FormikValues
+  ) => {
     try {
       dispatch(emailSignUp(values));
       resetForm();

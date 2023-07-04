@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { menuAni } from "../../utils/motion.utils";
 import { Link, useLocation } from "react-router-dom";
@@ -12,8 +12,7 @@ import { SearchContext } from "../../context/search-key.context";
 
 const MobileDeviceMenu = () => {
   const location = useLocation();
-  const { isMenuOpen, setIsMenueOpen, setIsProfileOpen } =
-    useContext(LayoutContext);
+  const { isMenuOpen, setIsProfileOpen } = useContext(LayoutContext);
   const { setKey } = useContext(SearchContext);
   const { isLogin, user } = useSelector(userSelector);
   const dispatch = useDispatch();
@@ -22,9 +21,6 @@ const MobileDeviceMenu = () => {
     dispatch(signOut());
     setIsProfileOpen();
   };
-  useEffect(() => {
-    setIsMenueOpen();
-  }, [location.pathname]);
 
   return (
     <AnimatePresence>

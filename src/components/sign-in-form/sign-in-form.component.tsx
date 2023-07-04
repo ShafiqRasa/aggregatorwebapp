@@ -4,6 +4,7 @@ import FormControl from "../form-control/form-control.component";
 import {
   signInFormInitialValues,
   signInFormValidationSchema,
+  signInFormInitialValuesType,
 } from "../../utils/yup-validation.utils";
 import Button from "../button/button-component";
 import { BUTTON_TYPES } from "../../utils/button-types.utils";
@@ -18,7 +19,7 @@ const SignInForm = () => {
   const [alert, setAlert] = useState(alertMessage);
   const handleDismis = () => setAlert(alertMessage);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = (values: signInFormInitialValuesType) => {
     try {
       dispatch(emailSignIn(values));
       setAlert({
@@ -26,7 +27,7 @@ const SignInForm = () => {
         isAlert: true,
         message: "User signed in successfully",
       });
-    } catch ({ code }) {
+    } catch (error) {
       setAlert({
         status: false,
         isAlert: true,

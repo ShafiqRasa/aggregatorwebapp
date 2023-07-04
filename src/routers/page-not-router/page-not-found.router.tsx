@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/button/button-component";
+import { BUTTON_TYPES } from "../../utils/button-types.utils";
 
 const NotFound = () => {
   return (

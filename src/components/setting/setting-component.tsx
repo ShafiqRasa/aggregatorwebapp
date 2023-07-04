@@ -1,9 +1,6 @@
 import Preferences from "../user-preferences/user-preferences.component";
 
 const Setting = () => {
-  const handleSetting = () => {
-    console.log("setting clicked");
-  };
   return (
     <div className="grid grid-cols-1 gap-y-4">
       {/* animated setting icon */}
@@ -14,7 +11,6 @@ const Setting = () => {
         strokeWidth="1.5"
         stroke="currentColor"
         className="w-6 h-6 text-right animate-spin hover:cursor-pointer justify-self-end"
-        onClick={handleSetting}
       >
         <path
           strokeLinecap="round"

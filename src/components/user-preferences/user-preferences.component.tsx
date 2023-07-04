@@ -23,8 +23,8 @@ const Preferences = () => {
   const handleSubmit = () => {
     setIsSubmitting(true);
     const fields = {
-      src: sources,
-      cat: categories,
+      sources: sources,
+      categories: categories,
       fromDate,
     };
     const jwt = user.jwt;

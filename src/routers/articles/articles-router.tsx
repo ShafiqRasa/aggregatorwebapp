@@ -2,17 +2,17 @@ import { useEffect, useState, useContext } from "react";
 import ReactPaginate from "react-paginate";
 import { classNames } from "../../utils/joiner-class.utils";
 import axios from "axios";
-import Article from "../article/article-component";
-import BounceLoader from "../bounc-loader/bounc-loader.component";
+import Article from "../../components/article/article-component";
+import BounceLoader from "../../components/bounc-loader/bounc-loader.component";
 import { SearchContext } from "../../context/search-key.context";
-import PageBar from "../page-bar/page-bar.component";
+import PageBar from "../../components/page-bar/page-bar.component";
 import { FunnelIcon } from "@heroicons/react/20/solid";
-import FilterDialog from "../filter-dialog-box/filter-dialog-box.component";
+import FilterDialog from "../../components/filter-dialog-box/filter-dialog-box.component";
 import { useSelector } from "react-redux";
 import { preferencesSelector } from "../../store/preferences/preferences-selector";
 import { motion } from "framer-motion";
 import { filterDialogAni } from "../../utils/motion.utils";
-import { articleProps } from "../article/article-component";
+import { articleProps } from "../../components/article/article-component";
 
 const initialArticlesValue = {
   results: [
@@ -30,7 +30,7 @@ type articles = {
   results: resultType[];
   total: number;
 };
-const Articles = () => {
+const ArticlesRout = () => {
   const [articles, setArticles] = useState<articles>(initialArticlesValue);
   const [filterDialog, setFilterDialog] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -55,6 +55,16 @@ const Articles = () => {
     getArticles(url);
   };
 
+  const filterByCategory = () => {
+    let categoryFilter = "";
+    if (categories.length > 0) {
+      categories.map((category) => {
+        categoryFilter += `&q=${category}`;
+      });
+    }
+    return categoryFilter;
+  };
+
   useEffect(() => {
     const url = `${
       process.env.REACT_APP_GUARDIAN_API
@@ -63,19 +73,6 @@ const Articles = () => {
     }`;
     getArticles(url);
   }, [key, fromDate, categories]);
-
-  const filterByCategory = () => {
-    let categoryFilter = "";
-    if (categories.length > 0) {
-      categories.map((category) => {
-        categoryFilter += `&q=${category}`;
-      });
-    } else {
-      return "";
-    }
-    return categoryFilter;
-  };
-
   return (
     <div className=" relative">
       <div className="w-full my-4 flex justify-between">
@@ -149,4 +146,5 @@ const Articles = () => {
     </div>
   );
 };
-export default Articles;
+
+export default ArticlesRout;

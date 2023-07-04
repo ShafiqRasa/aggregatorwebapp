@@ -5,7 +5,7 @@ import { LayoutContext } from "../../context/layout-context";
 const MenuIcon = () => {
   const { isMenuOpen, setIsMenueOpen } = useContext(LayoutContext);
   const handleMenu = () => {
-    setIsMenueOpen();
+    setIsMenueOpen(!isMenuOpen);
   };
   return (
     <div className="flex items-center sm:hidden ">

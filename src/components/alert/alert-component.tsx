@@ -20,7 +20,7 @@ const alertAni = {
 type alertProps = {
   status: Boolean;
   message: string;
-  handleDismis: () => {};
+  handleDismis: () => void;
 };
 const Alert = ({ status = true, message, handleDismis }: alertProps) => {
   return (

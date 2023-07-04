@@ -1,6 +1,7 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { PREFERENCE_ACTION_TYPES } from "./preference-types";
 import { getRequest, postRequest } from "../../utils/api-utils";
+import { getPreferences } from "./preference-actions";
 import {
   setAllFailed,
   getPreferencesFailed,
@@ -25,7 +26,7 @@ export function* onSetPreferences() {
 /**** END ** set preferences */
 
 /** START ** get preferences from database */
-export function* getPreferences({ payload: { jwt } }) {
+export function* getPreferencesAsync({ payload: { jwt } }) {
   try {
     const {
       data: { categories, fromDate },
@@ -39,7 +40,7 @@ export function* getPreferences({ payload: { jwt } }) {
 export function* onGetPreferences() {
   yield takeLatest(
     PREFERENCE_ACTION_TYPES.GET_PREFERENCES_START,
-    getPreferences
+    getPreferencesAsync
   );
 }
 /** END ** get preferences from database */

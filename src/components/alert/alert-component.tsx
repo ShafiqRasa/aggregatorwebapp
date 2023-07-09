@@ -1,27 +1,8 @@
 import { CheckCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { XCircleIcon } from "@heroicons/react/20/solid";
 import { motion } from "framer-motion";
+import { alertAni } from "../../utils/motion.utils";
 
-const alertAni = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-  },
-  transition: {
-    type: "spring",
-    stiffness: 150,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-type alertProps = {
-  status: Boolean;
-  message: string;
-  handleDismis: () => void;
-};
 const Alert = ({ status = true, message, handleDismis }: alertProps) => {
   return (
     <motion.div

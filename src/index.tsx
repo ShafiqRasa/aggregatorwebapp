@@ -9,6 +9,7 @@ import { store, persistor } from "./store/store";
 import { LayoutProvider } from "./context/layout-context";
 import { PersistGate } from "redux-persist/integration/react";
 import { SearchProvider } from "./context/search-key.context";
+import "./my-types.d.ts";
 
 // @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -50,3 +50,19 @@ export const filterDialogAni = {
     opacity: 0,
   },
 };
+
+export const alertAni = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+  transition: {
+    type: "spring",
+    stiffness: 150,
+  },
+  exit: {
+    opacity: 0,
+  },
+};

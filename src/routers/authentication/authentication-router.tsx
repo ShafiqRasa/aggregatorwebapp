@@ -10,7 +10,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    isLogin && navigate("/", { replace: true });
+    setTimeout(() => {
+      isLogin && navigate("/", { replace: true });
+    }, 3000);
   }, [isLogin]);
 
   return (

@@ -11,7 +11,7 @@ const Login = () => {
 
   useEffect(() => {
     isLogin && navigate("/", { replace: true });
-  }, [isLogin]);
+  }, [isLogin, navigate]);
 
   return (
     <div className=" grid gap-4 grid-cols-1 md:grid-cols-2 justify-center items-start min-h-screen">

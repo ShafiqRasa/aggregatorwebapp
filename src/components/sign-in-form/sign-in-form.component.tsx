@@ -23,10 +23,15 @@ const SignInForm = () => {
     try {
       dispatch(emailSignIn(values));
       setAlert({
-        status: true,
+        status: false,
         isAlert: true,
-        message: "User signed in successfully",
+        message: "I am so sorry, at the moment server is not available",
       });
+      // setAlert({
+      //   status: true,
+      //   isAlert: true,
+      //   message: "User signed in successfully",
+      // });
     } catch (error) {
       setAlert({
         status: false,
